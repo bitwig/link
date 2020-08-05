@@ -119,7 +119,7 @@ using StartStopStateCallback = std::function<void(bool)>;
 template <typename PeerCountCallback,
   typename TempoCallback,
   typename StartStopStateCallback,
-  typename Clock,
+  typename ClockT,
   typename Random,
   typename IoContext>
 class Controller
@@ -129,7 +129,7 @@ public:
     PeerCountCallback peerCallback,
     TempoCallback tempoCallback,
     StartStopStateCallback startStopStateCallback,
-    Clock clock,
+    ClockT clock,
     util::Injected<IoContext> io)
     : mTempoCallback(std::move(tempoCallback))
     , mStartStopStateCallback(std::move(startStopStateCallback))
@@ -691,7 +691,7 @@ private:
     SessionStartStopStateCallback>;
 
   using ControllerGateway =
-    Gateway<typename ControllerPeers::GatewayObserver, Clock, IoType&>;
+    Gateway<typename ControllerPeers::GatewayObserver, ClockT, IoType&>;
   using GatewayPtr = std::shared_ptr<ControllerGateway>;
 
   struct GatewayFactory
@@ -729,7 +729,7 @@ private:
 
   TempoCallback mTempoCallback;
   StartStopStateCallback mStartStopStateCallback;
-  Clock mClock;
+  ClockT mClock;
   NodeId mNodeId;
   SessionId mSessionId;
 
@@ -759,7 +759,7 @@ private:
     MeasurePeer,
     JoinSessionCallback,
     typename util::Injected<IoContext>::type&,
-    Clock>;
+    ClockT>;
   ControllerSessions mSessions;
 
   using Discovery =
