@@ -44,7 +44,7 @@ struct Beats
 
   constexpr double floating() const noexcept
   {
-    return microBeats() / 1e6;
+    return mValue / 1e6;
   }
 
   constexpr std::int64_t microBeats() const noexcept
@@ -54,22 +54,22 @@ struct Beats
 
   constexpr Beats operator-() const noexcept
   {
-    return Beats{-microBeats()};
+    return Beats{-mValue};
   }
 
   friend Beats abs(const Beats b) noexcept
   {
-    return Beats{std::abs(b.microBeats())};
+    return Beats{std::abs(b.mValue)};
   }
 
   friend constexpr Beats operator+(const Beats lhs, const Beats rhs) noexcept
   {
-    return Beats{lhs.microBeats() + rhs.microBeats()};
+    return Beats{lhs.mValue + rhs.mValue};
   }
 
   friend constexpr Beats operator-(const Beats lhs, const Beats rhs) noexcept
   {
-    return Beats{lhs.microBeats() - rhs.microBeats()};
+    return Beats{lhs.mValue - rhs.mValue};
   }
 
   friend constexpr Beats operator%(const Beats lhs, const Beats rhs) noexcept
