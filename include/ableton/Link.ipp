@@ -19,6 +19,7 @@
 
 #pragma once
 
+#include <ableton/Link.hpp>
 #include <ableton/link/Phase.hpp>
 
 namespace ableton
@@ -55,11 +56,7 @@ inline link::IncomingClientState toIncomingClientState(const link::ApiState& sta
 
 template <typename Clock>
 inline BasicLink<Clock>::BasicLink(const double bpm)
-  : mPeerCountCallback([](std::size_t) {})
-  , mTempoCallback([](link::Tempo) {})
-  , mStartStopCallback([](bool) {})
-  , mClock{}
-  , mController(link::Tempo(bpm),
+  : mController(link::Tempo(bpm),
       [this](const std::size_t peers) {
         std::lock_guard<std::mutex> lock(mCallbackMutex);
         mPeerCountCallback(peers);

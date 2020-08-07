@@ -370,9 +370,9 @@ private:
     link::platform::IoContext>;
 
   std::mutex mCallbackMutex;
-  link::PeerCountCallback mPeerCountCallback;
-  link::TempoCallback mTempoCallback;
-  link::StartStopStateCallback mStartStopCallback;
+  link::PeerCountCallback mPeerCountCallback = [](std::size_t) {};
+  link::TempoCallback mTempoCallback = [](link::Tempo) {};
+  link::StartStopStateCallback mStartStopCallback = [](bool) {};
   Clock mClock;
   Controller mController;
 };
