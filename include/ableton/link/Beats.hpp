@@ -74,7 +74,7 @@ struct Beats
 
   friend constexpr Beats operator%(const Beats lhs, const Beats rhs) noexcept
   {
-    return rhs == Beats{0.} ? Beats{0.} : Beats{lhs.microBeats() % rhs.microBeats()};
+    return Beats{rhs.mValue == 0 ? 0 : (lhs.mValue % rhs.mValue)};
   }
 
   friend constexpr bool operator<(const Beats lhs, const Beats rhs) noexcept
